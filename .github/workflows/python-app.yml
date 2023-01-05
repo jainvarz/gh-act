@@ -53,10 +53,12 @@ jobs:
           dev)
             ENV_VAR_1="dev_1"
             ENV_VAR_2="dev_2"
+            SEC_VAR= ${{ secrets.SECRET_KEY }}
           ;;
           qa)
             ENV_VAR_1="qa_1"
             ENV_VAR_2="qa_2"
+            SEC_VAR= ${{ secrets.SECRET_KEY }}
           ;;
           *)
             echo >&2 "ERROR: the target environment '${TARGET_ENV}' is not supported"
@@ -65,10 +67,13 @@ jobs:
         esac
         echo "ENV_VAR_1=${ENV_VAR_1}" >> $GITHUB_ENV
         echo "ENV_VAR_2=${ENV_VAR_2}" >> $GITHUB_ENV
+        echo "SEC_VAR=${SEC_VAR}" >> $GITHUB_ENV
+
     - name: validate params
       run: |
         echo $ENV_VAR_1
         echo $ENV_VAR_2
+        echo $SEC_VAR
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
