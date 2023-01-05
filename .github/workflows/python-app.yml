@@ -63,6 +63,8 @@ jobs:
             exit 1
           ;;
         esac
+        echo "ENV_VAR_1=${ENV_VAR_1}" >> $GITHUB_ENV
+        echo "ENV_VAR_2=${ENV_VAR_2}" >> $GITHUB_ENV
     - name: validate params
       run: |
         echo $ENV_VAR_1
