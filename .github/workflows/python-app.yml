@@ -46,6 +46,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: set env variables
+      working-directory: ./
+      run: |
+        case $TARGET_ENV in 
+          dev)
+            ENV_VAR_1="dev_1"
+            ENV_VAR_2="dev_2"
+          ;;
+          qa)
+            ENV_VAR_1="qa_1"
+            ENV_VAR_2="qa_2"
+          ;;
+          *)
+            echo >&2 "ERROR: the target environment '${TARGET_ENV}' is not supported"
+            exit 1
+          ;;
+        esac
+    - name: validate params
+      run: |
+        echo $ENV_VAR_1
+        echo $ENV_VAR_2
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
