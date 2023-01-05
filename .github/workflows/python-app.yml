@@ -19,6 +19,21 @@ on:
         description: Include  emojis
       environment:
         type: environment
+      target_env:
+        type: choice
+        description: "Environment to deploy to"
+        required: true
+        default: "nightly"
+        options:
+          - "dev"
+          - "nightly"
+          - "staging"
+          - "testnet"
+          - "prod"
+
+        
+env:
+  TARGET_ENV: ${{ github.event.inputs.target_env || 'nightly' }}
 
   
 permissions:
