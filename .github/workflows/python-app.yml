@@ -34,6 +34,8 @@ on:
         
 env:
   TARGET_ENV: ${{ github.event.inputs.environment || 'nightly' }}
+  SEC_VAR_DEV: ${{ secrets.SECRET_KEY_DEV }}
+  SEC_VAR_QA: ${{ secrets.SECRET_KEY_QA }}
 
   
 permissions:
@@ -53,12 +55,12 @@ jobs:
           dev)
             ENV_VAR_1="dev_1"
             ENV_VAR_2="dev_2"
-            SEC_VAR= ${{ secrets.SECRET_KEY }}
+            SEC_VAR=${{ env.SEC_VAR_DEV}}
           ;;
           qa)
             ENV_VAR_1="qa_1"
             ENV_VAR_2="qa_2"
-            SEC_VAR= ${{ secrets.SECRET_KEY }}
+            SEC_VAR=${{ env.SEC_VAR_QA}}
           ;;
           *)
             echo >&2 "ERROR: the target environment '${TARGET_ENV}' is not supported"
