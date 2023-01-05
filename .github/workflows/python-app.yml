@@ -33,7 +33,7 @@ on:
 
         
 env:
-  TARGET_ENV: ${{ github.event.inputs.target_env || 'nightly' }}
+  TARGET_ENV: ${{ github.event.inputs.environment || 'nightly' }}
 
   
 permissions:
@@ -65,4 +65,6 @@ jobs:
       run: |
         pytest
     - name: run shell script
-      run: echo "Hello world!"
+      run: |
+        echo "Hello world!"
+        echo $TARGET_ENV
